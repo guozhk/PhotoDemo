@@ -5,4 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_album">AlbumActivity</string>
     <string name="title_activity_recorder_vedio">RecorderVedioActivity</string>
+
+    <string name="title_activity_album_info">AlbumInfoActivity</string>
 </resources>

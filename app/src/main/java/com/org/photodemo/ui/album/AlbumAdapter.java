@@ -34,6 +34,11 @@ public class AlbumAdapter extends BaseAdapter {
         this.mGalleryList = mGalleryList;
     }
 
+    public List<GalleryEntity> getmGalleryList() {
+        return mGalleryList;
+    }
+
+
     @Override
     public int getCount() {
         return mGalleryList.size();
@@ -64,11 +69,13 @@ public class AlbumAdapter extends BaseAdapter {
         }
         GalleryEntity item = mGalleryList.get(position);
 
-       Bitmap bitmap=ImageUtil.originalImg(new File(item.getImagePath()));
-      //  Bitmap bitmap=ImageUtil.scaleImg(new File(item.getImagePath()), 200,200);
+        MyLogger.getMyLogger().e("item.getImagePath():" + item.getImagePath());
+       /* Bitmap bitmap=ImageUtil.originalImg(new File(item.getImagePath()));
         MyLogger.getMyLogger().e(bitmap);
-        //ImageLoader.getInstance().displayImage();
-       holder.imageView.setImageBitmap(bitmap);
+         holder.imageView.setImageBitmap(bitmap);*/
+
+        ImageLoader.getInstance().displayImage("file://"+item.getImagePath(), holder.imageView);
+
         String name = item.getBucketName();
         if (item.getImagePath().toUpperCase().contains("DCIM/CAMERA")) {
             name ="系统相册";
@@ -85,21 +92,5 @@ public class AlbumAdapter extends BaseAdapter {
         public TextView textView;
     }
 
-    /**
-     * @param url
-     * @return
-     */
-    public static Bitmap getLocalBitmap(String url, int inSampleSize) {
-        // Loger.i(url);
-        File file = new File(url);
-        if (file != null) {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            // options.inPurgeable = true;
-            options.inSampleSize = inSampleSize;
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-            return BitmapFactory.decodeFile(url, options);
-        }
-        return null;
-    }
 
 }

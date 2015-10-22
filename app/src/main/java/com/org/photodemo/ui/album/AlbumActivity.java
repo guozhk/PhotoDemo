@@ -1,6 +1,10 @@
 package com.org.photodemo.ui.album;
 
+
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
+
 import android.widget.ListView;
 
 import com.org.photodemo.R;
@@ -10,12 +14,11 @@ import com.org.photodemo.ui.album.util.PhotoSelectUtil;
 
 import java.util.List;
 
-/**
- * 自定义本地相册
- */
+
 public class AlbumActivity extends BaseActivity {
     private ListView lvAlbum;
     private AlbumAdapter mAlbumAdapter;
+
 
     @Override
     public void doInitSubView(View view) {
@@ -25,9 +28,20 @@ public class AlbumActivity extends BaseActivity {
 
     @Override
     public void doInitData() {
-        List<GalleryEntity> galleryEntityList= PhotoSelectUtil.QueryALLGalleryList(AlbumActivity.this);
+
+        List<GalleryEntity> galleryEntityList= PhotoSelectUtil.queryALLGalleryList(AlbumActivity.this);
         mAlbumAdapter= new AlbumAdapter(AlbumActivity.this,galleryEntityList);
         lvAlbum.setAdapter(mAlbumAdapter);
+        lvAlbum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               int bucketId=mAlbumAdapter.getmGalleryList().get(position).getBucketId();
+                Intent albumInfoIntent=new Intent(AlbumActivity.this,AlbumInfoActivity.class);
+                albumInfoIntent.putExtra("bucketId",bucketId);
+                startActivity(albumInfoIntent);
+            }
+        });
+
     }
 
     @Override

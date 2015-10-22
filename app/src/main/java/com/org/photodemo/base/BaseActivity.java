@@ -30,7 +30,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
     /**
      * 预留方法
      */
-    private void doBefore() {
+    protected void doBefore() {
     }
 
     protected <T extends View> T queryViewById(int viewId) {

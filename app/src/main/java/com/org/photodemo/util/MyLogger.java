@@ -8,7 +8,9 @@ import android.util.Log;
 public class MyLogger {
 
     private static MyLogger mgLogger;
-    private final static String tag = "[PhonoDemo]";
+
+    private final static String tag = "PhonoDemo";
+
     public static int logLevel = Log.VERBOSE;
     private static boolean isPrintlogFlag = true; //打印开关
 
