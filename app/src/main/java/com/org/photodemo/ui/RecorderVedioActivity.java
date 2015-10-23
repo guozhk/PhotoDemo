@@ -1,5 +1,6 @@
 package com.org.photodemo.ui;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,8 @@ import android.view.MenuItem;
 
 import com.org.photodemo.R;
 import com.org.photodemo.recordvdeo.MovieRecorderView;
+import com.org.photodemo.ui.recordvdeo.VideoPlayerActivity;
+import com.org.photodemo.util.MyLogger;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -38,6 +41,7 @@ public class RecorderVedioActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 // TODO Auto-generated method stub
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    MyLogger.getMyLogger().e("ACTION_DOWN:");
                     mRecorderView.record(new MovieRecorderView.OnRecordFinishListener() {
 
                         @Override
@@ -46,6 +50,7 @@ public class RecorderVedioActivity extends Activity {
                         }
                     });
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    MyLogger.getMyLogger().e("ACTION_UP:"+mRecorderView.getTimeCount());
                     if (mRecorderView.getTimeCount() > 1)
                         handler.sendEmptyMessage(1);
                     else {
@@ -92,11 +97,16 @@ public class RecorderVedioActivity extends Activity {
     };
 
     private void finishActivity() {
+        MyLogger.getMyLogger().e("isFinish:"+isFinish);
         if (isFinish) {
+            MyLogger.getMyLogger().e("isFinish:"+isFinish);
+
             mRecorderView.stop();
             //TODO
             //暂时注释掉
-         //   VideoPlayerActivity.startActivity(this, mRecorderView.getVecordFile().toString());
+            Intent vedioPlayerIntent=new Intent(RecorderVedioActivity.this,VideoPlayerActivity.class);
+            vedioPlayerIntent.putExtra("path",mRecorderView.getVecordFile().toString());
+            startActivity(vedioPlayerIntent);
         }
     }
 

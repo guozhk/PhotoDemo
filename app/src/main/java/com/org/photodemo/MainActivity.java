@@ -1,16 +1,16 @@
 package com.org.photodemo;
 
 import android.content.Intent;
-<<<<<<< Updated upstream
-=======
+
 import android.net.Uri;
->>>>>>> Stashed changes
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
 import com.org.photodemo.base.BaseActivity;
 
+import com.org.photodemo.record.VideoRecordActivity;
 import com.org.photodemo.ui.recordvdeo.RecorderVedioActivity;
 import com.org.photodemo.ui.album.AlbumActivity;
 import com.org.photodemo.ui.album.AlbumInfoAdapter;
@@ -87,7 +87,9 @@ public class MainActivity extends BaseActivity {
                 mTokePhoneUri=PicSelectedUtil.doTakePhoto(MainActivity.this,MainActivity.this,PicSelectedUtil.requestcode_camera);
                 break;
             case R.id.btn_record_vedio:
-                Intent recordVedioIntent = new Intent(MainActivity.this, RecorderVedioActivity.class);
+                //
+                // Intent recordVedioIntent = new Intent(MainActivity.this, RecorderVedioActivity.class);
+                Intent recordVedioIntent = new Intent(MainActivity.this, VideoRecordActivity.class);
 
                 startActivity(recordVedioIntent);
                 break;
